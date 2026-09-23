@@ -138,7 +138,7 @@ def test_transport(send, qid, domains):
         return {"status": "down", "detail": err}
     results = {}
     for d in domains:
-        ip, err = query(send, d, qid)
+        ip, err = query(send, d, qid, retries=2)
         results[d] = {"status": "ok", "ip": ip} if ip else {"status": "blocked", "detail": err}
     return {"status": "up", "domains": results}
 
@@ -211,16 +211,18 @@ def summarize(site, resolvers, tls):
         return res.get("status") == "up" and all(res["domains"][d]["status"] == "ok" for d in doms)
 
     isp = next(r for r in resolvers if r.get("isp"))
+    # None = ISP resolver unreachable, so we can't tell whether it blocks
+    isp_dns = works(isp, "udp") if isp["results"].get("udp", {}).get("status") == "up" else None
     tls_statuses = [tls[d]["status"] for d in doms]
     if "unknown" in tls_statuses:
         level = "unknown"
     elif any(s != "ok" for s in tls_statuses):
         level = "hard"
     else:
-        level = "open" if works(isp, "udp") else "dns"
+        level = {True: "open", False: "dns", None: "unknown"}[isp_dns]
     return {
         "level": level,
-        "isp_dns": works(isp, "udp"),
+        "isp_dns": isp_dns,
         "alt_dns": any(works(r, "udp") for r in resolvers if not r.get("isp")),
         "encrypted_dns": any(works(r, t) for r in resolvers for t in ("dot", "doh")),
         "tls": dict(zip(doms, tls_statuses)),

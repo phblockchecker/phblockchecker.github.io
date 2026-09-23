@@ -33,7 +33,8 @@ async function load(file) {
 }
 
 function check(label, ok) {
-  return el("li", { class: ok ? "yes" : "no", "data-mark": ok ? "✓" : "✗" }, label);
+  const [cls, mark] = ok == null ? ["unk", "?"] : ok ? ["yes", "✓"] : ["no", "✗"];
+  return el("li", { class: cls, "data-mark": mark }, label);
 }
 
 function renderSite(site, s, net, history) {

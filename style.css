@@ -85,6 +85,7 @@ code { font: 0.9em ui-monospace, SFMono-Regular, Menlo, monospace; background: v
 .checks li::before { content: attr(data-mark); display: inline-block; width: 1.3em; font-weight: 700; }
 .checks .yes::before { color: var(--ok); }
 .checks .no::before { color: var(--hard); }
+.checks .unk::before { color: var(--none); }
 
 .history { display: flex; gap: 1px; height: 26px; align-items: stretch; }
 .history span { flex: 1; min-width: 0; border-radius: 2px; }
