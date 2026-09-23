@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>cicc discord/reddit ban check</title>
-  <meta name="description" content="Is Discord or Reddit blocked on Globe right now? Live hourly check, plus a list of DNS server IPs that still work with Discord and Reddit, and how to set them up.">
+  <meta name="description" content="Is Discord or Reddit blocked on Globe right now? Live check every 10 minutes, plus a list of DNS server IPs that still work with Discord and Reddit, and how to set them up.">
   <link rel="canonical" href="https://phblockchecker.github.io/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#131312">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="cicc discord/reddit ban check">
   <meta property="og:title" content="cicc discord/reddit ban check">
-  <meta property="og:description" content="Is Discord or Reddit blocked on Globe right now? Live hourly check, plus DNS server IPs that still work with Discord and Reddit.">
+  <meta property="og:description" content="Is Discord or Reddit blocked on Globe right now? Live check every 10 minutes, plus DNS server IPs that still work with Discord and Reddit.">
   <meta property="og:url" content="https://phblockchecker.github.io/">
   <meta property="og:image" content="https://phblockchecker.github.io/og.png">
   <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="en_PH">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "WebSite", "name": "cicc discord/reddit ban check", "url": "https://phblockchecker.github.io/", "description": "Is Discord or Reddit blocked on Globe right now? Live hourly check, plus DNS server IPs that still work with Discord and Reddit."}
+  {"@context": "https://schema.org", "@type": "WebSite", "name": "cicc discord/reddit ban check", "url": "https://phblockchecker.github.io/", "description": "Is Discord or Reddit blocked on Globe right now? Live check every 10 minutes, plus DNS server IPs that still work with Discord and Reddit."}
   </script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -27,7 +27,7 @@
   <main>
     <header>
       <h1>cicc discord/reddit ban check</h1>
-      <p class="meta" id="meta">Live status of Discord and Reddit on Globe, checked every hour.</p>
+      <p class="meta" id="meta">Live status of Discord and Reddit on Globe, checked every 10 minutes.</p>
       <p class="warn" id="stale" hidden>The probe hasn't reported in a while. These results may be out of date.</p>
     </header>
 
@@ -93,9 +93,9 @@
     <section class="faq">
       <h2>FAQ</h2>
       <h3>Is Discord blocked on Globe?</h3>
-      <p>Check the Discord card at the top of this page. It's updated every hour from a real home Globe connection, and shows whether Discord opens normally or is blocked.</p>
+      <p>Check the Discord card at the top of this page. It's updated every 10 minutes from a real home Globe connection, and shows whether Discord opens normally or is blocked.</p>
       <h3>What DNS works with Discord and Reddit?</h3>
-      <p>See the list above. It's updated every hour with the DNS server IPs that currently return the real Discord and Reddit addresses on Globe. Some well-known ones like 1.1.1.1 and 8.8.8.8 can get hijacked by Globe, so check the list instead of guessing.</p>
+      <p>See the list above. It's updated every 10 minutes with the DNS server IPs that currently return the real Discord and Reddit addresses on Globe. Some well-known ones like 1.1.1.1 and 8.8.8.8 can get hijacked by Globe, so check the list instead of guessing.</p>
       <h3>Why won't Discord or Reddit load on Globe?</h3>
       <p>Most ISP blocks work through DNS, the system that turns names like discord.com into addresses. Globe's DNS can refuse to answer or point you to a block page. Stricter blocks cut the connection based on the site's name (SNI) or its IP address.</p>
       <h3>How do I unblock Discord or Reddit on Globe?</h3>
@@ -183,7 +183,7 @@ HTTP/2 200</code></pre>
     </details>
 
     <footer>
-      <p>An automated probe checks every hour. It tests DNS answers from each server, whether plain DNS traffic is being hijacked, and whether connections are cut based on the site's name (SNI) or IP address.</p>
+      <p>An automated probe checks every 10 minutes. It tests DNS answers from each server, whether plain DNS traffic is being hijacked, and whether connections are cut based on the site's name (SNI) or IP address.</p>
       <p>Not affiliated with CICC, Globe, Discord or Reddit. No tracking, no cookies.</p>
     </footer>
   </main>

@@ -2,7 +2,7 @@
 const DATA_URL = location.hostname === "localhost"
   ? "pi/out/"
   : "https://raw.githubusercontent.com/phblockchecker/phblockchecker.github.io/data/";
-const STALE_HOURS = 3;
+const STALE_HOURS = 1;
 
 const LEVELS = {
   open: ["Open", (net) => `Works normally on ${net}.`],

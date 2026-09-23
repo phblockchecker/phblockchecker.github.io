@@ -2,7 +2,7 @@
   "network": "Globe",
   "isp_resolver": "gateway",
   "timeout": 4,
-  "history_limit": 168,
+  "history_limit": 144,
   "control": "wikipedia.org",
   "decoy_sni": "example.com",
   "hijack_probe_ip": "192.0.2.1",
