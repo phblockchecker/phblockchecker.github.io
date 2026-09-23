@@ -2,6 +2,7 @@
 # Run the checker, then force-push out/ as a single parentless commit to the `data` branch.
 # Setup once: see README. Set GIT_PROXY=socks5h://127.0.0.1:9050 to push through Tor.
 set -euo pipefail
+export TZ=UTC  # commit timestamps carry no local timezone
 cd "$(dirname "$0")"
 
 python3 checker.py
