@@ -1,4 +1,4 @@
-# PH Block Check
+# cicc discord/reddit ban check
 
 A static site showing whether Discord/Reddit are blocked on a PH ISP, and how. A Raspberry Pi probes every hour and force-pushes the results to a `data` branch. GitHub Pages serves the site from `main`.
 

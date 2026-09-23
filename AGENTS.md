@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-PH Block Check is a static site showing whether Discord and Reddit are blocked on a PH ISP (Globe), how it's being done, and how to get around it.
+cicc discord/reddit ban check is a static site showing whether Discord and Reddit are blocked on a PH ISP (Globe), how it's being done, and how to get around it.
 
 - **Probe** (`pi/checker.py`): runs hourly on a Raspberry Pi on a home Globe line. It tests plain DNS, DoT and DoH against every resolver in `pi/config.json`, checks for DNS hijacking, and checks for SNI/IP filtering. Writes `pi/out/latest.json` and `pi/out/history.json`. Needs only python3 and curl.
 - **Publish** (`pi/publish.sh`): force-pushes `pi/out/` to the `data` branch as a single parentless commit, optionally through Tor (`GIT_PROXY`).

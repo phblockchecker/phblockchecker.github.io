@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Is Discord or Reddit blocked on Globe? Live check · PH Block Check</title>
-  <meta name="description" content="Live hourly check: is Discord or Reddit blocked on Globe right now? See how it's blocked (DNS, SNI or IP) and how to unblock it with free encrypted DNS.">
+  <title>cicc discord/reddit ban check</title>
+  <meta name="description" content="Is Discord or Reddit blocked on Globe right now? Live hourly check, plus a list of DNS server IPs that still work with Discord and Reddit, and how to set them up.">
   <link rel="canonical" href="https://phblockchecker.github.io/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#131312">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="PH Block Check">
-  <meta property="og:title" content="Is Discord or Reddit blocked on Globe?">
-  <meta property="og:description" content="Live hourly check: is Discord or Reddit blocked on Globe right now? See how it's blocked (DNS, SNI or IP) and how to unblock it with free encrypted DNS.">
+  <meta property="og:site_name" content="cicc discord/reddit ban check">
+  <meta property="og:title" content="cicc discord/reddit ban check">
+  <meta property="og:description" content="Is Discord or Reddit blocked on Globe right now? Live hourly check, plus DNS server IPs that still work with Discord and Reddit.">
   <meta property="og:url" content="https://phblockchecker.github.io/">
   <meta property="og:image" content="https://phblockchecker.github.io/og.png">
   <meta property="og:image:width" content="1200">
@@ -19,20 +19,31 @@
   <meta property="og:locale" content="en_PH">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "WebSite", "name": "PH Block Check", "url": "https://phblockchecker.github.io/", "description": "Live hourly check: is Discord or Reddit blocked on Globe right now? See how it's blocked (DNS, SNI or IP) and how to unblock it with free encrypted DNS."}
+  {"@context": "https://schema.org", "@type": "WebSite", "name": "cicc discord/reddit ban check", "url": "https://phblockchecker.github.io/", "description": "Is Discord or Reddit blocked on Globe right now? Live hourly check, plus DNS server IPs that still work with Discord and Reddit."}
   </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
     <header>
-      <h1>PH Block Check</h1>
-      <p class="lede">Is it blocked on <span data-network>Globe</span> right now, and how do you get around it?</p>
+      <h1>cicc discord/reddit ban check</h1>
       <p class="meta" id="meta">Live status of Discord and Reddit on Globe, checked every hour.</p>
       <p class="warn" id="stale" hidden>The probe hasn't reported in a while. These results may be out of date.</p>
     </header>
 
     <section id="sites" class="sites" aria-live="polite"></section>
+
+    <section>
+      <h2>DNS servers that work with Discord and Reddit</h2>
+      <p class="muted">These returned the real addresses for both sites in the latest check. Tap one to copy it.</p>
+      <h3 class="sub">Regular DNS (IP addresses)</h3>
+      <p class="muted">Put these in your Wi-Fi, phone or router DNS settings. They work for now, but <span data-network>Globe</span> can start hijacking any of them at any time.</p>
+      <div class="chips" id="plain-ok"><span class="muted">Loading the latest list…</span></div>
+      <h3 class="sub">Encrypted DNS (hostnames)</h3>
+      <p class="muted">For Android's Private DNS setting. These can't be hijacked the same way, so they're the long-term fix.</p>
+      <div class="chips" id="dot-ok"><span class="muted">Loading the latest list…</span></div>
+      <p class="callout hard-note" id="hijacked-note" hidden></p>
+    </section>
 
     <section>
       <h2>How to get around it</h2>
@@ -69,7 +80,7 @@
     </section>
 
     <section>
-      <h2>DNS servers tested</h2>
+      <h2>All DNS servers tested</h2>
       <p class="muted">Tested from a home <span data-network></span> connection. "Plain" is regular DNS. DoT and DoH are encrypted DNS, which is harder for the ISP to tamper with.</p>
       <div class="table-wrap">
         <table>
@@ -83,19 +94,97 @@
       <h2>FAQ</h2>
       <h3>Is Discord blocked on Globe?</h3>
       <p>Check the Discord card at the top of this page. It's updated every hour from a real home Globe connection, and shows whether Discord opens normally or is blocked.</p>
+      <h3>What DNS works with Discord and Reddit?</h3>
+      <p>See the list above. It's updated every hour with the DNS server IPs that currently return the real Discord and Reddit addresses on Globe. Some well-known ones like 1.1.1.1 and 8.8.8.8 can get hijacked by Globe, so check the list instead of guessing.</p>
       <h3>Why won't Discord or Reddit load on Globe?</h3>
       <p>Most ISP blocks work through DNS, the system that turns names like discord.com into addresses. Globe's DNS can refuse to answer or point you to a block page. Stricter blocks cut the connection based on the site's name (SNI) or its IP address.</p>
       <h3>How do I unblock Discord or Reddit on Globe?</h3>
       <p>If it's a DNS block, switch your phone or browser to encrypted DNS such as Cloudflare (<code>one.one.one.one</code>) or Google (<code>dns.google</code>). The steps above take about a minute. If the page says it's blocked past DNS, use a VPN such as the free Cloudflare WARP app.</p>
       <h3>Is using a different DNS legal?</h3>
-      <p>Choosing your own DNS provider is a normal setting built into Android, iOS, Windows and every major browser.</p>
+      <p>Yes. Choosing your own DNS provider is a normal setting built into Android, iOS, Windows and every major browser.</p>
       <h3 lang="fil">Bakit ayaw gumana ng Discord o Reddit sa Globe?</h3>
       <p lang="fil">Kadalasan, hinaharangan ito ng Globe sa DNS. Palitan ang Private DNS ng phone mo sa <code>one.one.one.one</code> para gumana ulit. Kung naka-block pa rin, gumamit ng VPN gaya ng libreng Cloudflare WARP.</p>
     </section>
 
+    <details class="nerds">
+      <summary><h2>More info for nerds</h2></summary>
+      <p class="muted">Captured 2026-09-23 from a home Globe connection. Try these yourself (on Windows, <code>nslookup discord.com 1.1.1.1</code> works in place of <code>dig</code>).</p>
+
+      <h3>1. Globe's DNS answers with a block page</h3>
+      <p>Globe's resolvers answer <code>discord.com</code> with a CNAME to its block page instead of Discord's real Cloudflare IPs.</p>
+<pre><code># uses your default DNS, which on Globe is Globe's resolver
+$ dig discord.com +short
+forbiddenaccess.globe.com.ph.
+8.232.13.4</code></pre>
+
+      <h3>2. Queries to 1.1.1.1 and 8.8.8.8 are hijacked</h3>
+      <p>Plain DNS (UDP port 53) sent to Cloudflare, Google and OpenDNS is intercepted in transit and answered by Globe, with the same block page:</p>
+<pre><code>$ dig @1.1.1.1 discord.com +short
+forbiddenaccess.globe.com.ph.
+8.232.13.4
+
+$ dig @8.8.8.8 discord.com +short
+forbiddenaccess.globe.com.ph.
+8.232.13.4</code></pre>
+      <p>Other resolvers aren't intercepted, so they return Discord's real addresses:</p>
+<pre><code>$ dig @9.9.9.9 discord.com +short
+162.159.136.232
+162.159.138.232
+162.159.135.232
+…</code></pre>
+
+      <h3>3. Proof it's Globe answering, not Google</h3>
+      <p><code>o-o.myaddr.l.google.com</code> is a special name: Google's servers reply with the IP of the resolver that asked. A real Google resolver answers with a Google address (<code>172.253.x.x</code>), which is what you get over encrypted DNS. Over plain DNS to 8.8.8.8, it comes back with a Globe address:</p>
+<pre><code># encrypted: reaches the real Google
+$ curl -s 'https://dns.google/resolve?name=o-o.myaddr.l.google.com&amp;type=TXT'
+… "data":"172.253.6.18" …      ← Google
+
+# plain: intercepted
+$ dig @8.8.8.8 o-o.myaddr.l.google.com TXT +short
+"2001:fd8:2f2:8::9"            ← not Google
+
+$ whois -h whois.cymru.com " 2001:fd8:2f2:8::9"
+AS    | IP                | AS Name
+4775  | 2001:fd8:2f2:8::9 | GLOBE-TELECOM-AS - Globe Telecoms, PH</code></pre>
+      <p>Same story for Cloudflare. The real 1.1.1.1 answers <code>id.server</code> with the datacenter you reached (like <code>"mnl04"</code>). On Globe, whatever answers has no idea:</p>
+<pre><code>$ dig @1.1.1.1 id.server TXT CH
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR
+;; flags: qr aa rd; QUERY: 1, ANSWER: 0      ← empty, not Cloudflare</code></pre>
+
+      <h3>4. The block page itself</h3>
+      <p>8.232.13.4 is hosted on Google Cloud, and its TLS certificate is for Globe's block page, not Discord. This is also how the probe detects block pages automatically: a real answer must present a valid certificate for the site.</p>
+<pre><code>$ openssl s_client -connect 8.232.13.4:443 -servername discord.com &lt;/dev/null 2&gt;/dev/null \
+    | openssl x509 -noout -subject -issuer
+subject=CN=forbiddenaccess.globe.com.ph
+issuer=C=US, O=Google Trust Services, CN=WR3
+
+$ whois -h whois.cymru.com " 8.232.13.4"
+396982 | 8.232.13.4 | GOOGLE-CLOUD-PLATFORM - Google LLC, US</code></pre>
+
+      <h3>5. Encrypted DNS and the connection itself are untouched</h3>
+      <p>DNS over HTTPS/TLS isn't intercepted, and connections to Discord's real IPs complete a normal TLS handshake with <code>SNI=discord.com</code>. So there's no SNI or IP filtering (yet). This is a pure DNS block.</p>
+<pre><code>$ curl -s -H 'accept: application/dns-json' \
+    'https://cloudflare-dns.com/dns-query?name=discord.com&amp;type=A'
+{"Answer":[{"name":"discord.com","type":1,"data":"162.159.138.232"}, …]}
+
+$ curl -sI https://discord.com --resolve discord.com:443:162.159.136.232 | head -1
+HTTP/2 200</code></pre>
+
+      <h3>How the probe decides</h3>
+      <ul>
+        <li><b>Blocked (DNS):</b> the answer is NXDOMAIN/REFUSED/empty, a private/bogus IP, a CNAME to a known block page (like <code>forbiddenaccess.globe.com.ph</code>), a known block page IP, or an IP whose TLS certificate doesn't match the site.</li>
+        <li><b>No reply:</b> the resolver didn't answer a control query (wikipedia.org), so it's down or unreachable, not blocking.</li>
+        <li><b>—:</b> not offered by that provider, or the resolver timed out or dropped the connection on some lookups. Flaky, not proof of blocking.</li>
+        <li><b>Hijacked:</b> a third-party resolver's plain DNS returns the ISP's own block page, or a query to an address that runs no DNS server (192.0.2.1) gets an answer.</li>
+        <li><b>Filtered by name (SNI):</b> a TLS handshake to the site's real IP fails with the real name but succeeds with a decoy name.</li>
+        <li><b>IP blocked:</b> the handshake fails with both names.</li>
+      </ul>
+      <p class="muted">Every failure is retried before it counts. The probe's source is in this site's GitHub repo.</p>
+    </details>
+
     <footer>
       <p>An automated probe checks every hour. It tests DNS answers from each server, whether plain DNS traffic is being hijacked, and whether connections are cut based on the site's name (SNI) or IP address.</p>
-      <p>No tracking, no cookies.</p>
+      <p>Not affiliated with CICC, Globe, Discord or Reddit. No tracking, no cookies.</p>
     </footer>
   </main>
   <script src="app.js"></script>

@@ -60,15 +60,40 @@ function renderSite(site, s, net, history) {
     el("div", { class: "history-legend" }, el("span", {}, history.length ? ago(history[0].t) : ""), el("span", {}, "now")));
 }
 
-function resolverCell(res) {
+const clean = (res) => res?.status === "up" && Object.values(res.domains).every((d) => d.status === "ok");
+const provider = (name) => name.replace(/ \(.*\)$/, "");
+
+function chip(value, label) {
+  const node = el("button", { class: "chip", type: "button", title: "Copy" }, el("code", {}, value), el("span", {}, label));
+  node.addEventListener("click", () => navigator.clipboard?.writeText(value).then(() => {
+    node.classList.add("copied");
+    setTimeout(() => node.classList.remove("copied"), 1200);
+  }));
+  return node;
+}
+
+function renderWorking(data) {
+  const others = data.resolvers.filter((r) => !r.isp);
+  const hosts = new Map(others.filter((r) => r.tls_host && clean(r.results.dot)).map((r) => [r.tls_host, provider(r.name)]));
+  const none = () => el("span", { class: "muted" }, "None right now.");
+  const plain = others.filter((r) => clean(r.results.udp)).map((r) => chip(r.ip, provider(r.name)));
+  document.getElementById("plain-ok").replaceChildren(...(plain.length ? plain : [none()]));
+  document.getElementById("dot-ok").replaceChildren(...(hosts.size ? [...hosts].map(([h, n]) => chip(h, n)) : [none()]));
+
+  const hijacked = others.filter((r) => data.hijacked?.includes(r.name));
+  const note = document.getElementById("hijacked-note");
+  note.hidden = !hijacked.length;
+  note.textContent = `Don't use: ${hijacked.map((r) => `${r.ip} (${provider(r.name)})`).join(", ")}. ${data.network} is hijacking plain DNS sent to these and returning its block page.`;
+}
+
+function resolverCell(res, sites) {
   if (!res) return el("td", {}, el("span", { class: "pill na" }, "—"));
   if (res.status === "down") return el("td", {}, el("span", { class: "pill na", title: res.detail }, "No reply"));
-  const all = Object.entries(res.domains);
-  const blocked = all.filter(([, d]) => d.status !== "ok");
-  const pill = blocked.length
-    ? el("span", { class: "pill hard", title: blocked.map(([n, d]) => `${n}: ${d.detail}`).join("\n") }, `Blocked ${blocked.length}/${all.length}`)
-    : el("span", { class: "pill open" }, "OK");
-  return el("td", {}, pill);
+  const blocked = Object.entries(res.domains).filter(([, d]) => d.status === "blocked");
+  const names = sites.filter((s) => s.domains.some((d) => res.domains[d]?.status === "blocked")).map((s) => s.name);
+  if (blocked.length)
+    return el("td", {}, el("span", { class: "pill hard", title: blocked.map(([n, d]) => `${n}: ${d.detail}`).join("\n") }, `${names.join(", ")} blocked`));
+  return el("td", {}, clean(res) ? el("span", { class: "pill open" }, "OK") : el("span", { class: "pill na" }, "—"));
 }
 
 function render(data, history) {
@@ -81,16 +106,18 @@ function render(data, history) {
   document.getElementById("sites").replaceChildren(
     ...data.sites.map((site) => renderSite(site, data.summary[site.name], net, history)));
 
+  const hijackedNames = [...new Set((data.hijacked || []).map(provider))].join(", ");
   document.getElementById("fix-intro").textContent = [
     levels.every((l) => l === "open") ? "Nothing is blocked right now. If that changes, these steps help." : "Switch to encrypted DNS. It's free and takes a minute.",
-    data.dns_intercepted ? `Heads up: ${net} is hijacking plain DNS, so just typing in 1.1.1.1 won't work. Use the encrypted options below.` : "",
+    data.dns_intercepted ? `Heads up: ${net} is hijacking plain DNS${hijackedNames ? ` to ${hijackedNames}` : ""}, so just typing in 1.1.1.1 won't work. The regular DNS servers listed as working above will do for now, but encrypted DNS is the long-term fix.` : "",
   ].join(" ");
+  renderWorking(data);
   document.getElementById("vpn-note").hidden = !levels.includes("hard");
 
   document.getElementById("resolvers").replaceChildren(...data.resolvers.map((r) =>
     el("tr", {},
       el("td", {}, r.name, el("span", { class: "ip" }, r.ip || (r.isp ? "via your home router" : "encrypted only"))),
-      ...["udp", "dot", "doh"].map((t) => resolverCell(r.results[t])))));
+      ...["udp", "dot", "doh"].map((t) => resolverCell(r.results[t], data.sites)))));
 }
 
 Promise.all([load("latest.json"), load("history.json").catch(() => [])])

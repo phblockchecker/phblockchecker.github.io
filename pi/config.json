@@ -7,6 +7,7 @@
   "decoy_sni": "example.com",
   "hijack_probe_ip": "192.0.2.1",
   "blockpage_ips": ["8.232.13.4"],
+  "blockpage_hosts": ["forbiddenaccess.globe.com.ph"],
   "sites": [
     { "name": "Discord", "domains": ["discord.com", "discord.gg", "gateway.discord.gg", "cdn.discordapp.com"] },
     { "name": "Reddit", "domains": ["reddit.com", "www.reddit.com", "i.redd.it"] }

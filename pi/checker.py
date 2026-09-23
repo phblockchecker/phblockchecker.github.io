@@ -16,10 +16,11 @@ CONFIG = json.loads((HERE / "config.json").read_text())
 OUT = HERE / "out"
 TIMEOUT = CONFIG["timeout"]
 BLOCKPAGE_IPS = set(CONFIG["blockpage_ips"])
+BLOCKPAGE_HOSTS = set(CONFIG["blockpage_hosts"])
 RCODES = {1: "FORMERR", 2: "SERVFAIL", 3: "NXDOMAIN", 5: "REFUSED"}
 
 
-# --- DNS wire format (A records only) ---
+# --- DNS wire format (A queries; A + CNAME answers) ---
 
 def build_query(name, qid):
     header = struct.pack(">HHHHHH", qid, 0x0100, 1, 0, 0, 0)
@@ -35,6 +36,19 @@ def skip_name(buf, i):
     return i + 1
 
 
+def read_name(buf, i):
+    labels = []
+    for _ in range(128):  # bounds compression-pointer loops
+        if not buf[i]:
+            break
+        if buf[i] & 0xC0 == 0xC0:
+            i = struct.unpack(">H", buf[i:i + 2])[0] & 0x3FFF
+            continue
+        labels.append(buf[i + 1:i + 1 + buf[i]].decode(errors="replace"))
+        i += buf[i] + 1
+    return ".".join(labels).lower()
+
+
 def parse_response(buf, qid):
     rid, flags, qdcount, ancount, _, _ = struct.unpack(">HHHHHH", buf[:12])
     if rid != qid:
@@ -42,15 +56,17 @@ def parse_response(buf, qid):
     i = 12
     for _ in range(qdcount):
         i = skip_name(buf, i) + 4
-    ips = []
+    ips, cnames = [], []
     for _ in range(ancount):
         i = skip_name(buf, i)
         rtype, _, _, rdlen = struct.unpack(">HHIH", buf[i:i + 10])
         i += 10
         if rtype == 1 and rdlen == 4:
             ips.append(socket.inet_ntoa(buf[i:i + 4]))
+        elif rtype == 5:
+            cnames.append(read_name(buf, i))
         i += rdlen
-    return flags & 0xF, ips
+    return flags & 0xF, ips, cnames
 
 
 # --- Transports ---
@@ -112,36 +128,38 @@ def is_bogus(ip):
 
 
 def query(send, domain, qid, retries=1):
-    """Return (ip, None) on a clean answer, else (None, reason). Retries to skip transient failures."""
-    ip, err = query_once(send, domain, qid)
-    return query(send, domain, qid, retries - 1) if err and retries else (ip, err)
+    """Return (ip, err, status): status is ok | blocked (bad answer) | error (no usable reply).
+    Retries to skip transient failures."""
+    ip, err, status = query_once(send, domain, qid)
+    return query(send, domain, qid, retries - 1) if err and retries else (ip, err, status)
 
 
 def query_once(send, domain, qid):
     try:
-        rcode, ips = parse_response(send(build_query(domain, qid)), qid)
+        rcode, ips, cnames = parse_response(send(build_query(domain, qid)), qid)
     except TimeoutError:
-        return None, "timeout"
+        return None, "timeout", "error"
     except Exception as e:
-        return None, str(e) or type(e).__name__
+        return None, str(e) or type(e).__name__, "error"
     if rcode:
-        return None, RCODES.get(rcode, f"rcode {rcode}")
+        return None, RCODES.get(rcode, f"rcode {rcode}"), "blocked"
+    if page := next((c for c in cnames if c in BLOCKPAGE_HOSTS), None) or \
+            next((ip for ip in ips if ip in BLOCKPAGE_IPS), None):
+        return None, f"block page {page}", "blocked"
     if not ips:
-        return None, "no answer"
-    if page := next((ip for ip in ips if ip in BLOCKPAGE_IPS), None):
-        return None, f"block page {page}"
+        return None, "no answer", "blocked"
     bad = next((ip for ip in ips if is_bogus(ip)), None)
-    return (None, f"bogus IP {bad}") if bad else (ips[0], None)
+    return (None, f"bogus IP {bad}", "blocked") if bad else (ips[0], None, "ok")
 
 
 def test_transport(send, qid, domains):
-    _, err = query(send, CONFIG["control"], qid)
+    _, err, _ = query(send, CONFIG["control"], qid)
     if err:
         return {"status": "down", "detail": err}
     results = {}
     for d in domains:
-        ip, err = query(send, d, qid, retries=2)
-        results[d] = {"status": "ok", "ip": ip} if ip else {"status": "blocked", "detail": err}
+        ip, err, status = query(send, d, qid, retries=2)
+        results[d] = {"status": "ok", "ip": ip} if ip else {"status": status, "detail": err}
     return {"status": "up", "domains": results}
 
 
@@ -182,16 +200,15 @@ def probe_answered():
     return query(lambda q: udp(CONFIG["hijack_probe_ip"], q), CONFIG["control"], qid, retries=0)[1] != "timeout"
 
 
-def blockpage_ips(resolvers, isp):
-    return {res["detail"].split()[-1]
-            for r in resolvers if bool(r.get("isp")) == isp
-            for res in r["results"].get("udp", {}).get("domains", {}).values()
+def blockpage_ips(r):
+    return {res["detail"].split()[-1] for res in r["results"].get("udp", {}).get("domains", {}).values()
             if res.get("detail", "").startswith("block page")}
 
 
-def third_party_blockpages(resolvers):
-    """The ISP's own block page coming back from another resolver means the ISP rewrote the reply."""
-    return bool(blockpage_ips(resolvers, False) & (blockpage_ips(resolvers, True) | BLOCKPAGE_IPS))
+def hijacked_resolvers(resolvers):
+    """Non-ISP resolvers whose plain DNS returned the ISP's own block page (the ISP rewrote the reply)."""
+    isp_pages = BLOCKPAGE_IPS.union(*(blockpage_ips(r) for r in resolvers if r.get("isp")))
+    return [r["name"] for r in resolvers if not r.get("isp") and blockpage_ips(r) & isp_pages]
 
 
 def default_gateway():
@@ -234,12 +251,15 @@ def summarize(site, resolvers, tls):
     doms = site["domains"]
 
     def works(r, t):
+        """True = all clean, False = something blocked, None = can't tell (down or errors)."""
         res = r["results"].get(t, {})
-        return res.get("status") == "up" and all(res["domains"][d]["status"] == "ok" for d in doms)
+        if res.get("status") != "up":
+            return None
+        statuses = {res["domains"][d]["status"] for d in doms}
+        return False if "blocked" in statuses else None if "error" in statuses else True
 
     isp = next(r for r in resolvers if r.get("isp"))
-    # None = ISP resolver unreachable, so we can't tell whether it blocks
-    isp_dns = works(isp, "udp") if isp["results"].get("udp", {}).get("status") == "up" else None
+    isp_dns = works(isp, "udp")
     tls_statuses = [tls[d]["status"] for d in doms]
     if "unknown" in tls_statuses:
         level = "unknown"
@@ -250,8 +270,8 @@ def summarize(site, resolvers, tls):
     return {
         "level": level,
         "isp_dns": isp_dns,
-        "alt_dns": any(works(r, "udp") for r in resolvers if not r.get("isp")),
-        "encrypted_dns": any(works(r, t) for r in resolvers for t in ("dot", "doh")),
+        "alt_dns": any(works(r, "udp") is True for r in resolvers if not r.get("isp")),
+        "encrypted_dns": any(works(r, t) is True for r in resolvers for t in ("dot", "doh")),
         "tls": dict(zip(doms, tls_statuses)),
     }
 
@@ -269,7 +289,8 @@ def main():
             r.setdefault("results", {})[t] = f.result()
         flag_blockpages(resolvers, pool)
         tls = dict(zip(domains, pool.map(lambda d: test_tls(d, clean_ip(resolvers, d)), domains)))
-        hijack = probe.result() or third_party_blockpages(resolvers)
+        hijacked = hijacked_resolvers(resolvers)
+        hijack = probe.result() or bool(hijacked)
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     summary = {s["name"]: summarize(s, resolvers, tls) for s in CONFIG["sites"]}
@@ -278,10 +299,11 @@ def main():
         "network": CONFIG["network"],
         "sites": CONFIG["sites"],
         "dns_intercepted": hijack,
+        "hijacked": hijacked,
         "summary": summary,
         "tls": tls,
         # ISP resolver IP is the home router's, so it's not published
-        "resolvers": [{k: r[k] for k in ("name", "ip", "results") if k in r and not (k == "ip" and r.get("isp"))}
+        "resolvers": [{k: r[k] for k in ("name", "ip", "tls_host", "results") if k in r and not (k == "ip" and r.get("isp"))}
                       | {"isp": r.get("isp", False)} for r in resolvers],
     }
 
