@@ -23,7 +23,7 @@ pi/publish.sh                   run probe + push pi/out/ to the `data` branch
 
 ## 2. Pi
 
-Needs `python3`, `curl`, and `git` (all preinstalled on Raspberry Pi OS). The Pi must use the ISP's default DNS; don't set custom DNS on the Pi or the router. You can also pin it in `config.json` → `isp_resolver`.
+Needs `python3`, `curl`, and `git` (all preinstalled on Raspberry Pi OS). The ISP's DNS is tested through the home router (the default gateway), so a Pi-hole or custom DNS on the Pi doesn't matter. Just don't set custom DNS on the router itself. To test a specific resolver instead, set `isp_resolver` in `config.json` to its IP.
 
 ```sh
 git clone https://github.com/<user>/<repo>.git ~/ph-dns-checker

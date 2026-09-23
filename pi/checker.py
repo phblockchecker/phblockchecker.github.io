@@ -180,12 +180,21 @@ def dns_intercepted():
     return query(lambda q: udp(CONFIG["hijack_probe_ip"], q), CONFIG["control"], qid, retries=0)[1] != "timeout"
 
 
+def default_gateway():
+    try:
+        for line in Path("/proc/net/route").read_text().splitlines()[1:]:
+            f = line.split()
+            if f[1] == "00000000":
+                return socket.inet_ntoa(struct.pack("<L", int(f[2], 16)))
+    except FileNotFoundError:  # macOS, for local testing
+        out = subprocess.run(["route", "-n", "get", "default"], capture_output=True, text=True).stdout
+        return next(l.split()[1] for l in out.splitlines() if "gateway:" in l)
+
+
 def isp_resolver():
+    """The home router forwards DNS to the ISP, unlike resolv.conf (which may point at a Pi-hole)."""
     ip = CONFIG["isp_resolver"]
-    if ip == "auto":
-        lines = Path("/etc/resolv.conf").read_text().splitlines()
-        ip = next(l.split()[1] for l in lines if l.startswith("nameserver"))
-    return {"name": f"{CONFIG['network']} default", "ip": ip, "isp": True}
+    return {"name": f"{CONFIG['network']} default", "ip": default_gateway() if ip == "gateway" else ip, "isp": True}
 
 
 def flag_blockpages(isp):
@@ -253,8 +262,9 @@ def main():
         "dns_intercepted": hijack,
         "summary": summary,
         "tls": tls,
-        "resolvers": [{k: r[k] for k in ("name", "ip", "results") if k in r} | {"isp": r.get("isp", False)}
-                      for r in resolvers],
+        # ISP resolver IP is the home router's, so it's not published
+        "resolvers": [{k: r[k] for k in ("name", "ip", "results") if k in r and not (k == "ip" and r.get("isp"))}
+                      | {"isp": r.get("isp", False)} for r in resolvers],
     }
 
     OUT.mkdir(exist_ok=True)

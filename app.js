@@ -89,7 +89,7 @@ function render(data, history) {
 
   document.getElementById("resolvers").replaceChildren(...data.resolvers.map((r) =>
     el("tr", {},
-      el("td", {}, r.name, el("span", { class: "ip" }, r.ip || "encrypted only")),
+      el("td", {}, r.name, el("span", { class: "ip" }, r.ip || (r.isp ? "via your home router" : "encrypted only"))),
       ...["udp", "dot", "doh"].map((t) => resolverCell(r.results[t])))));
 }
 
