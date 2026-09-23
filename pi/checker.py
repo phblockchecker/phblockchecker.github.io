@@ -108,7 +108,7 @@ def senders(r):
 # --- Checks ---
 
 def is_bogus(ip):
-    return ip in BLOCKPAGE_IPS or not ipaddress.ip_address(ip).is_global
+    return not ipaddress.ip_address(ip).is_global
 
 
 def query(send, domain, qid, retries=1):
@@ -128,6 +128,8 @@ def query_once(send, domain, qid):
         return None, RCODES.get(rcode, f"rcode {rcode}")
     if not ips:
         return None, "no answer"
+    if page := next((ip for ip in ips if ip in BLOCKPAGE_IPS), None):
+        return None, f"block page {page}"
     bad = next((ip for ip in ips if is_bogus(ip)), None)
     return (None, f"bogus IP {bad}") if bad else (ips[0], None)
 
@@ -174,10 +176,22 @@ def test_tls(domain, ip):
     return {"status": "sni" if decoy != "interfered" else "ip", "ip": ip}
 
 
-def dns_intercepted():
+def probe_answered():
     """A reply from an address that runs no DNS server means port 53 is being hijacked."""
     qid = random.getrandbits(16)
     return query(lambda q: udp(CONFIG["hijack_probe_ip"], q), CONFIG["control"], qid, retries=0)[1] != "timeout"
+
+
+def blockpage_ips(resolvers, isp):
+    return {res["detail"].split()[-1]
+            for r in resolvers if bool(r.get("isp")) == isp
+            for res in r["results"].get("udp", {}).get("domains", {}).values()
+            if res.get("detail", "").startswith("block page")}
+
+
+def third_party_blockpages(resolvers):
+    """The ISP's own block page coming back from another resolver means the ISP rewrote the reply."""
+    return bool(blockpage_ips(resolvers, False) & (blockpage_ips(resolvers, True) | BLOCKPAGE_IPS))
 
 
 def default_gateway():
@@ -197,11 +211,15 @@ def isp_resolver():
     return {"name": f"{CONFIG['network']} default", "ip": default_gateway() if ip == "gateway" else ip, "isp": True}
 
 
-def flag_blockpages(isp):
-    """ISP answers that look valid but serve the wrong cert are block pages."""
-    for d, res in isp["results"].get("udp", {}).get("domains", {}).items():
-        if res["status"] == "ok" and tls_handshake(res["ip"], d, True) == "bad_cert":
-            isp["results"]["udp"]["domains"][d] = {"status": "blocked", "detail": f"block page {res['ip']}"}
+def flag_blockpages(resolvers, pool):
+    """Plain DNS answers that look valid but serve the wrong cert are block pages."""
+    answers = [(res, d) for r in resolvers
+               for d, res in r["results"].get("udp", {}).get("domains", {}).items() if res["status"] == "ok"]
+    keys = list({(res["ip"], d) for res, d in answers})
+    fake = {k for k, v in zip(keys, pool.map(lambda k: tls_handshake(*k, True), keys)) if v == "bad_cert"}
+    for res, d in answers:
+        if (res["ip"], d) in fake:
+            res.update(status="blocked", detail=f"block page {res.pop('ip')}")
 
 
 def clean_ip(resolvers, domain):
@@ -244,14 +262,14 @@ def main():
     jobs = [(r, t, send) for r in resolvers for t, send in senders(r).items()]
 
     with ThreadPoolExecutor(32) as pool:
-        hijack = pool.submit(dns_intercepted)
+        probe = pool.submit(probe_answered)
         futures = [pool.submit(test_transport, send, 0 if t == "doh" else random.getrandbits(16), domains)
                    for _, t, send in jobs]
         for (r, t, _), f in zip(jobs, futures):
             r.setdefault("results", {})[t] = f.result()
-        flag_blockpages(resolvers[0])
+        flag_blockpages(resolvers, pool)
         tls = dict(zip(domains, pool.map(lambda d: test_tls(d, clean_ip(resolvers, d)), domains)))
-        hijack = hijack.result()
+        hijack = probe.result() or third_party_blockpages(resolvers)
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     summary = {s["name"]: summarize(s, resolvers, tls) for s in CONFIG["sites"]}
