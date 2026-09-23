@@ -3,16 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PH Block Check</title>
-  <meta name="description" content="Live check of whether Discord and Reddit are blocked on Philippine ISPs, and how to get around it.">
+  <title>Is Discord or Reddit blocked on Globe? Live check · PH Block Check</title>
+  <meta name="description" content="Live hourly check: is Discord or Reddit blocked on Globe right now? See how it's blocked (DNS, SNI or IP) and how to unblock it with free encrypted DNS.">
+  <link rel="canonical" href="https://phblockchecker.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#131312">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PH Block Check">
+  <meta property="og:title" content="Is Discord or Reddit blocked on Globe?">
+  <meta property="og:description" content="Live hourly check: is Discord or Reddit blocked on Globe right now? See how it's blocked (DNS, SNI or IP) and how to unblock it with free encrypted DNS.">
+  <meta property="og:url" content="https://phblockchecker.github.io/">
+  <meta property="og:image" content="https://phblockchecker.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_PH">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebSite", "name": "PH Block Check", "url": "https://phblockchecker.github.io/", "description": "Live hourly check: is Discord or Reddit blocked on Globe right now? See how it's blocked (DNS, SNI or IP) and how to unblock it with free encrypted DNS."}
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
     <header>
       <h1>PH Block Check</h1>
-      <p class="lede">Is it blocked on <span data-network>your ISP</span> right now, and how do you get around it?</p>
-      <p class="meta" id="meta">Loading…</p>
+      <p class="lede">Is it blocked on <span data-network>Globe</span> right now, and how do you get around it?</p>
+      <p class="meta" id="meta">Live status of Discord and Reddit on Globe, checked every hour.</p>
       <p class="warn" id="stale" hidden>The probe hasn't reported in a while. These results may be out of date.</p>
     </header>
 
@@ -61,6 +77,20 @@
           <tbody id="resolvers"></tbody>
         </table>
       </div>
+    </section>
+
+    <section class="faq">
+      <h2>FAQ</h2>
+      <h3>Is Discord blocked on Globe?</h3>
+      <p>Check the Discord card at the top of this page. It's updated every hour from a real home Globe connection, and shows whether Discord opens normally or is blocked.</p>
+      <h3>Why won't Discord or Reddit load on Globe?</h3>
+      <p>Most ISP blocks work through DNS, the system that turns names like discord.com into addresses. Globe's DNS can refuse to answer or point you to a block page. Stricter blocks cut the connection based on the site's name (SNI) or its IP address.</p>
+      <h3>How do I unblock Discord or Reddit on Globe?</h3>
+      <p>If it's a DNS block, switch your phone or browser to encrypted DNS such as Cloudflare (<code>one.one.one.one</code>) or Google (<code>dns.google</code>). The steps above take about a minute. If the page says it's blocked past DNS, use a VPN such as the free Cloudflare WARP app.</p>
+      <h3>Is using a different DNS legal?</h3>
+      <p>Choosing your own DNS provider is a normal setting built into Android, iOS, Windows and every major browser.</p>
+      <h3 lang="fil">Bakit ayaw gumana ng Discord o Reddit sa Globe?</h3>
+      <p lang="fil">Kadalasan, hinaharangan ito ng Globe sa DNS. Palitan ang Private DNS ng phone mo sa <code>one.one.one.one</code> para gumana ulit. Kung naka-block pa rin, gumamit ng VPN gaya ng libreng Cloudflare WARP.</p>
     </section>
 
     <footer>

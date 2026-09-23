@@ -116,3 +116,5 @@ td .ip { display: block; color: var(--muted); font: 0.8rem ui-monospace, Menlo, 
 td .pill { font-size: 0.8rem; padding: 2px 9px; cursor: default; }
 
 footer { margin-top: 56px; color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--border); padding-top: 20px; }
+
+.faq h3 { font-size: 1rem; margin: 20px 0 6px; }
