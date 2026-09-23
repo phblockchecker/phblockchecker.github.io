@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PH Block Check</title>
+  <meta name="description" content="Live check of whether Discord and Reddit are blocked on Philippine ISPs, and how to get around it.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>PH Block Check</h1>
+      <p class="lede">Is it blocked on <span data-network>your ISP</span> right now, and how do you get around it?</p>
+      <p class="meta" id="meta">Loading…</p>
+      <p class="warn" id="stale" hidden>The probe hasn't reported in a while. These results may be out of date.</p>
+    </header>
+
+    <section id="sites" class="sites" aria-live="polite"></section>
+
+    <section>
+      <h2>How to get around it</h2>
+      <p id="fix-intro"></p>
+      <div class="guides">
+        <details>
+          <summary>Android</summary>
+          <p>Settings → Network &amp; internet → <b>Private DNS</b> → "Private DNS provider hostname" → enter <code>one.one.one.one</code> (or <code>dns.google</code>).</p>
+          <p class="muted">Samsung: Settings → Connections → More connection settings → Private DNS.</p>
+        </details>
+        <details>
+          <summary>iPhone / iPad</summary>
+          <p>Install Cloudflare's free <b>1.1.1.1</b> app from the App Store, open it, and switch it on. The default "1.1.1.1" mode encrypts your DNS.</p>
+        </details>
+        <details>
+          <summary>Windows 11</summary>
+          <p>Settings → Network &amp; internet → Wi-Fi (or Ethernet) → <b>Hardware properties</b> → DNS server assignment → Edit → Manual.</p>
+          <p>Turn on IPv4. Preferred DNS <code>1.1.1.1</code>, alternate <code>1.0.0.1</code>. Set <b>DNS over HTTPS</b> to "On (automatic template)".</p>
+        </details>
+        <details>
+          <summary>Mac</summary>
+          <p>Easiest: install the <b>1.1.1.1</b> app for macOS, or use the browser settings below.</p>
+        </details>
+        <details>
+          <summary>Chrome / Edge / Brave</summary>
+          <p>Settings → Privacy and security → Security → <b>Use secure DNS</b> → pick Cloudflare (1.1.1.1).</p>
+        </details>
+        <details>
+          <summary>Firefox</summary>
+          <p>Settings → Privacy &amp; Security → <b>DNS over HTTPS</b> → Max Protection → Cloudflare.</p>
+        </details>
+      </div>
+      <p class="callout" id="vpn-note" hidden>Some of it is blocked past DNS, so changing DNS won't be enough. Use a VPN: turn on <b>WARP</b> in the free 1.1.1.1 app, or use Proton VPN's free plan.</p>
+    </section>
+
+    <section>
+      <h2>DNS servers tested</h2>
+      <p class="muted">Tested from a home <span data-network></span> connection. "Plain" is regular DNS. DoT and DoH are encrypted DNS, which is harder for the ISP to tamper with.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Server</th><th>Plain</th><th>DoT</th><th>DoH</th></tr></thead>
+          <tbody id="resolvers"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <p>An automated probe checks every hour. It tests DNS answers from each server, whether plain DNS traffic is being hijacked, and whether connections are cut based on the site's name (SNI) or IP address.</p>
+      <p>No tracking, no cookies.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
