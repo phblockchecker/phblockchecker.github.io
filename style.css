@@ -115,6 +115,21 @@ tr:last-child td { border-bottom: 0; }
 th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
 td .ip { display: block; color: var(--muted); font: 0.8rem ui-monospace, Menlo, monospace; }
 td .pill { font-size: 0.8rem; padding: 2px 9px; cursor: default; }
+td .pill[tabindex] { cursor: help; }
+.tip {
+  position: fixed; z-index: 10; display: grid; gap: 12px; padding: 12px 14px;
+  width: max-content; max-width: min(340px, calc(100vw - 32px)); font-size: 0.85rem; overflow-wrap: anywhere;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+}
+.tip[hidden] { display: none; }
+.tip .checks { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 0; font-size: inherit; }
+.tip li { display: grid; grid-template-columns: 1.3em 1fr; }
+.tip li > * { grid-column: 2; }
+.tip-site { color: var(--muted); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.tip-detail { color: var(--muted); font-size: 0.78rem; line-height: 1.4; margin-top: 2px; }
+.tip-detail code { font-size: 0.95em; }
+.tip-tag { color: var(--hard); font-weight: 600; margin-right: 6px; }
+.tip-title { font-style: italic; }
 
 footer { margin-top: 56px; color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--border); padding-top: 20px; }
 
@@ -148,3 +163,16 @@ pre {
   font: 0.8rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 pre code { background: none; padding: 0; font-size: inherit; }
+
+/* Loading skeletons */
+.skel { display: block; height: 14px; background: var(--border); border-radius: 6px; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+.skel-title { width: 110px; height: 30px; }
+.skel-pill { width: 120px; height: 28px; border-radius: 999px; }
+.skel-line { width: 70%; height: 16px; margin: 16px 0 20px; }
+.skel-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px 16px; margin-bottom: 20px; }
+.skel-history { height: 26px; margin-bottom: 27px; }
+.skel-chip { height: 38px; border-radius: 10px; }
+.skel-ip { width: 70px; height: 11px; margin-top: 7px; }
+.skel-cell { width: 44px; height: 22px; border-radius: 999px; }

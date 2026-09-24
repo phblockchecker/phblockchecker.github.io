@@ -32,9 +32,9 @@ async function load(file) {
   return res.json();
 }
 
-function check(label, ok) {
+function check(label, ok, ...extra) {
   const [cls, mark] = ok == null ? ["unk", "?"] : ok ? ["yes", "✓"] : ["no", "✗"];
-  return el("li", { class: cls, "data-mark": mark }, label);
+  return el("li", { class: cls, "data-mark": mark }, label, ...extra);
 }
 
 function renderSite(site, s, net, history) {
@@ -86,14 +86,50 @@ function renderWorking(data) {
   note.textContent = `Don't use: ${hijacked.map((r) => `${r.ip} (${provider(r.name)})`).join(", ")}. ${data.network} is hijacking plain DNS sent to these and returning its block page.`;
 }
 
+// One shared, fixed-position tooltip so the table's scroll box doesn't clip it
+const tip = el("div", { class: "tip", role: "tooltip", hidden: "" });
+document.body.append(tip);
+const hideTip = () => (tip.hidden = true);
+addEventListener("scroll", hideTip, { passive: true, capture: true });
+
+// Second line under a domain: block page address, why, and its title
+function domainDetail(d) {
+  if (d.status === "ok") return [];
+  const page = d.detail.match(/^(likely )?block page (\S+)(?: \((.+)\))?$/);
+  if (!page) return [el("div", { class: "tip-detail" }, d.status === "error" ? `No response · ${d.detail}` : d.detail)];
+  const [, likely, addr, why] = page;
+  return [el("div", { class: "tip-detail" },
+    el("span", { class: "tip-tag" }, likely ? "Likely block page" : "Block page"), el("code", {}, addr), why ? ` · ${why}` : ""),
+    ...(d.title ? [el("div", { class: "tip-detail tip-title" }, `“${d.title}”`)] : [])];
+}
+
+// Hover/tap a pill to see ✓/✗/? per domain, grouped by site
+function withDomains(pill, res, sites) {
+  const show = () => {
+    tip.replaceChildren(...sites.map((s) => el("section", {},
+      el("div", { class: "tip-site" }, s.name),
+      el("ul", { class: "checks" }, ...s.domains.filter((n) => res.domains[n]).map((n) =>
+        check(el("span", {}, n), { ok: true, blocked: false }[res.domains[n].status], ...domainDetail(res.domains[n])))))));
+    tip.hidden = false;
+    const r = pill.getBoundingClientRect();
+    const below = r.bottom + 6 + tip.offsetHeight < innerHeight;
+    tip.style.left = `${Math.max(16, Math.min(r.left, innerWidth - tip.offsetWidth - 16))}px`;
+    tip.style.top = `${below ? r.bottom + 6 : r.top - tip.offsetHeight - 6}px`;
+  };
+  pill.tabIndex = 0;
+  for (const e of ["mouseenter", "focus"]) pill.addEventListener(e, show);
+  for (const e of ["mouseleave", "blur"]) pill.addEventListener(e, hideTip);
+  return pill;
+}
+
 function resolverCell(res, sites) {
   if (!res) return el("td", {}, el("span", { class: "pill na" }, "—"));
   if (res.status === "down") return el("td", {}, el("span", { class: "pill na", title: res.detail }, "No reply"));
-  const blocked = Object.entries(res.domains).filter(([, d]) => d.status === "blocked");
+  if (clean(res)) return el("td", {}, el("span", { class: "pill open" }, "OK"));
   const names = sites.filter((s) => s.domains.some((d) => res.domains[d]?.status === "blocked")).map((s) => s.name);
-  if (blocked.length)
-    return el("td", {}, el("span", { class: "pill hard", title: blocked.map(([n, d]) => `${n}: ${d.detail}${d.title ? ` "${d.title}"` : ""}`).join("\n") }, `${names.join(", ")} blocked`));
-  return el("td", {}, clean(res) ? el("span", { class: "pill open" }, "OK") : el("span", { class: "pill na" }, "—"));
+  return el("td", {}, withDomains(names.length
+    ? el("span", { class: "pill hard" }, `${names.join(", ")} blocked`)
+    : el("span", { class: "pill na" }, "—"), res, sites));
 }
 
 function render(data, history) {
@@ -120,9 +156,26 @@ function render(data, history) {
       ...["udp", "dot", "doh"].map((t) => resolverCell(r.results[t], data.sites)))));
 }
 
+// Pulsing placeholders shaped like the real content, shown until the data loads
+const bone = (cls, width) => el("span", { class: `skel ${cls}`, ...(width && { style: `width: ${width}px` }) });
+
+function renderSkeletons() {
+  document.getElementById("sites").replaceChildren(...[0, 1].map(() => el("article", { class: "card", "aria-hidden": "true" },
+    el("div", { class: "card-head" }, bone("skel-title"), bone("skel-pill")),
+    bone("skel-line"),
+    el("div", { class: "skel-checks" }, ...[90, 100, 120, 100].map((w) => bone("skel-text", w))),
+    bone("skel-history"))));
+  for (const id of ["plain-ok", "dot-ok"])
+    document.getElementById(id).replaceChildren(...[150, 120, 160, 130].map((w) => bone("skel-chip", w)));
+  document.getElementById("resolvers").replaceChildren(...[140, 110, 170, 90, 130, 150, 100, 120].map((w) =>
+    el("tr", { "aria-hidden": "true" }, el("td", {}, bone("skel-text", w), bone("skel-ip")), ...[0, 1, 2].map(() => el("td", {}, bone("skel-cell"))))));
+}
+
+renderSkeletons();
 Promise.all([load("latest.json"), load("history.json").catch(() => [])])
   .then(([data, history]) => render(data, history))
   .catch((err) => {
     document.getElementById("meta").textContent = "Couldn't load results. Try again later.";
+    for (const id of ["sites", "resolvers", "plain-ok", "dot-ok"]) document.getElementById(id).replaceChildren();
     console.error(err);
   });
