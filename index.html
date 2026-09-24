@@ -28,6 +28,7 @@
     <header>
       <h1>cicc discord/reddit ban check</h1>
       <p class="meta" id="meta">Live status of Discord and Reddit on Globe, checked every 10 minutes.</p>
+      <p class="warn">These results only cover Globe. Other ISPs like Converge and PLDT may block differently, or not at all.</p>
       <p class="warn" id="stale" hidden>The probe hasn't reported in a while. These results may be out of date.</p>
     </header>
 
@@ -172,7 +173,7 @@ HTTP/2 200</code></pre>
 
       <h3>How the probe decides</h3>
       <ul>
-        <li><b>Blocked (DNS):</b> the answer is NXDOMAIN/REFUSED/empty, a private/bogus IP, a CNAME to a known block page (like <code>forbiddenaccess.globe.com.ph</code>), a known block page IP, or an IP whose TLS certificate doesn't match the site.</li>
+        <li><b>Blocked (DNS):</b> the answer is NXDOMAIN/REFUSED/empty, a private/bogus IP, a CNAME to a known block page (like <code>forbiddenaccess.globe.com.ph</code>), or a known block page IP. <b>Likely block page:</b> an IP that only plain DNS returned (encrypted DNS never did) and that serves the wrong TLS certificate, or no working HTTPS while the real IP does. If every encrypted resolver is blocked, the real IPs come from DoH over Tor.</li>
         <li><b>No reply:</b> the resolver didn't answer a control query (wikipedia.org), so it's down or unreachable, not blocking.</li>
         <li><b>—:</b> not offered by that provider, or the resolver timed out or dropped the connection on some lookups. Flaky, not proof of blocking.</li>
         <li><b>Hijacked:</b> a third-party resolver's plain DNS returns the ISP's own block page, or a query to an address that runs no DNS server (192.0.2.1) gets an answer.</li>

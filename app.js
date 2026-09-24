@@ -92,14 +92,14 @@ function resolverCell(res, sites) {
   const blocked = Object.entries(res.domains).filter(([, d]) => d.status === "blocked");
   const names = sites.filter((s) => s.domains.some((d) => res.domains[d]?.status === "blocked")).map((s) => s.name);
   if (blocked.length)
-    return el("td", {}, el("span", { class: "pill hard", title: blocked.map(([n, d]) => `${n}: ${d.detail}`).join("\n") }, `${names.join(", ")} blocked`));
+    return el("td", {}, el("span", { class: "pill hard", title: blocked.map(([n, d]) => `${n}: ${d.detail}${d.title ? ` "${d.title}"` : ""}`).join("\n") }, `${names.join(", ")} blocked`));
   return el("td", {}, clean(res) ? el("span", { class: "pill open" }, "OK") : el("span", { class: "pill na" }, "—"));
 }
 
 function render(data, history) {
   const net = data.network;
   document.querySelectorAll("[data-network]").forEach((n) => (n.textContent = net));
-  document.getElementById("meta").textContent = `Measured from a home ${net} connection · updated ${ago(data.updated)}`;
+  document.getElementById("meta").textContent = `Measured from a home ${net} 5G connection · updated ${ago(data.updated)}`;
   document.getElementById("stale").hidden = Date.now() - new Date(data.updated) < STALE_HOURS * 3600e3;
 
   const levels = Object.values(data.summary).map((s) => s.level);

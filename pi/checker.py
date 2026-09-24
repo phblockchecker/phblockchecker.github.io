@@ -3,10 +3,12 @@
 import ipaddress
 import json
 import random
+import re
 import socket
 import ssl
 import struct
 import subprocess
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
@@ -15,8 +17,9 @@ HERE = Path(__file__).resolve().parent
 CONFIG = json.loads((HERE / "config.json").read_text())
 OUT = HERE / "out"
 TIMEOUT = CONFIG["timeout"]
-BLOCKPAGE_IPS = set(CONFIG["blockpage_ips"])
-BLOCKPAGE_HOSTS = set(CONFIG["blockpage_hosts"])
+KNOWN_PAGES = CONFIG["blockpages"].get(CONFIG["network"], {})  # confirmed; other ISPs rely on auto-detection
+BLOCKPAGE_IPS = set(KNOWN_PAGES.get("ips", []))
+BLOCKPAGE_HOSTS = set(KNOWN_PAGES.get("hosts", []))
 RCODES = {1: "FORMERR", 2: "SERVFAIL", 3: "NXDOMAIN", 5: "REFUSED"}
 
 
@@ -98,16 +101,29 @@ def dot(ip, host, q):
 CURL_ERRORS = {6: "can't resolve host", 7: "connect failed", 22: "HTTP error", 35: "TLS error", 56: "reset"}
 
 
-def doh(url, q):
-    # curl, not urllib: some DoH servers are HTTP/2-only
-    p = subprocess.run(["curl", "-sf", "--http2", "--max-time", str(TIMEOUT), "--data-binary", "@-",
-                        "-H", "content-type: application/dns-message", "-H", "accept: application/dns-message", url],
-                       input=q, capture_output=True)
+def curl(*args, input=None, timeout=TIMEOUT):
+    p = subprocess.run(["curl", "-s", "--max-time", str(timeout), *args], input=input, capture_output=True)
     if p.returncode == 28:
         raise TimeoutError
     if p.returncode:
         raise ConnectionError(CURL_ERRORS.get(p.returncode, f"curl {p.returncode}"))
     return p.stdout
+
+
+def doh(url, q, tor=False):
+    # curl, not urllib: some DoH servers are HTTP/2-only (curl uses it when built with it)
+    proxy = ["--proxy", CONFIG["tor_proxy"]] if tor else []
+    return curl("-f", *proxy, "--data-binary", "@-", "-H", "content-type: application/dns-message",
+                "-H", "accept: application/dns-message", url, input=q, timeout=TIMEOUT * 3 if tor else TIMEOUT)
+
+
+def page_title(ip, domain):
+    try:
+        html = curl("-L", "--max-redirs", "3", "-H", f"Host: {domain}", f"http://{ip}/").decode(errors="replace")
+    except (TimeoutError, ConnectionError):
+        return None
+    m = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+    return m and " ".join(m.group(1).split())[:100]
 
 
 def senders(r):
@@ -201,8 +217,8 @@ def probe_answered():
 
 
 def blockpage_ips(r):
-    return {res["detail"].split()[-1] for res in r["results"].get("udp", {}).get("domains", {}).values()
-            if res.get("detail", "").startswith("block page")}
+    return {res["detail"].partition("block page ")[2].split()[0]
+            for res in r["results"].get("udp", {}).get("domains", {}).values() if "block page " in res.get("detail", "")}
 
 
 def hijacked_resolvers(resolvers):
@@ -212,14 +228,16 @@ def hijacked_resolvers(resolvers):
 
 
 def default_gateway():
-    try:
-        for line in Path("/proc/net/route").read_text().splitlines()[1:]:
-            f = line.split()
-            if f[1] == "00000000":
-                return socket.inet_ntoa(struct.pack("<L", int(f[2], 16)))
-    except FileNotFoundError:  # macOS, for local testing
-        out = subprocess.run(["route", "-n", "get", "default"], capture_output=True, text=True).stdout
-        return next(l.split()[1] for l in out.splitlines() if "gateway:" in l)
+    linux = Path("/proc/net/route")
+    if linux.exists():
+        f = next(f for f in map(str.split, linux.read_text().splitlines()[1:]) if f[1] == "00000000")
+        return socket.inet_ntoa(struct.pack("<L", int(f[2], 16)))
+    if sys.platform == "win32":
+        out = subprocess.run(["route", "print", "-4", "0.0.0.0"], capture_output=True, text=True).stdout
+        # skip "On-link" (VPN) routes
+        return next(f[2] for f in map(str.split, out.splitlines()) if f[:2] == ["0.0.0.0"] * 2 and f[2][0].isdigit())
+    out = subprocess.run(["route", "-n", "get", "default"], capture_output=True, text=True).stdout  # macOS
+    return next(l.split()[1] for l in out.splitlines() if "gateway:" in l)
 
 
 def isp_resolver():
@@ -228,23 +246,51 @@ def isp_resolver():
     return {"name": f"{CONFIG['network']} default", "ip": default_gateway() if ip == "gateway" else ip, "isp": True}
 
 
-def flag_blockpages(resolvers, pool):
-    """Plain DNS answers that look valid but serve the wrong cert are block pages."""
-    answers = [(res, d) for r in resolvers
-               for d, res in r["results"].get("udp", {}).get("domains", {}).items() if res["status"] == "ok"]
-    keys = list({(res["ip"], d) for res, d in answers})
-    fake = {k for k, v in zip(keys, pool.map(lambda k: tls_handshake(*k, True), keys)) if v == "bad_cert"}
+def ok_answers(resolvers, transports):
+    return [(res, d) for r in resolvers for t in transports
+            for d, res in r["results"].get(t, {}).get("domains", {}).items() if res["status"] == "ok"]
+
+
+def trusted_ips(resolvers, domains, pool):
+    """Encrypted answers the ISP can't rewrite. Falls back to DoH over Tor (if running) when all are blocked."""
+    trusted = {d: set() for d in domains}
+    for res, d in ok_answers(resolvers, ("doh", "dot")):
+        trusted[d].add(res["ip"])
+    missing = [d for d, ips in trusted.items() if not ips]
+    for d, (ip, _, _) in zip(missing, pool.map(lambda d: query(lambda q: doh(CONFIG["tor_doh"], q, True), d, 0), missing)):
+        trusted[d].update([ip] if ip else [])
+    return trusted
+
+
+def flag_blockpages(resolvers, pool, trusted):
+    """A plain DNS answer the encrypted ones never gave is a likely block page if it doesn't serve the site:
+    wrong cert, or no working HTTPS while a trusted IP has it."""
+    answers = ok_answers(resolvers, ("udp",))
+    keys = list({(res["ip"], d) for res, d in answers if res["ip"] not in trusted[d]}
+                | {(ip, d) for d, ips in trusted.items() for ip in ips})
+    hs = dict(zip(keys, pool.map(lambda k: tls_handshake(*k, True), keys)))
+
+    def reason(ip, d):
+        if ip in trusted[d]:
+            return None
+        if hs[ip, d] == "bad_cert":
+            return "wrong cert"
+        if hs[ip, d] != "ok" and any(hs[t, d] == "ok" for t in trusted[d]):
+            return "no HTTPS"
+
+    flagged = {k: why for k in keys if (why := reason(*k))}
+    titles = dict(zip(flagged, pool.map(lambda k: page_title(*k), flagged)))
     for res, d in answers:
-        if (res["ip"], d) in fake:
-            res.update(status="blocked", detail=f"block page {res.pop('ip')}")
+        if why := flagged.get((res["ip"], d)):
+            ip = res.pop("ip")
+            res.update(status="blocked", detail=f"likely block page {ip} ({why})")
+            if titles[ip, d]:
+                res["title"] = titles[ip, d]
 
 
-def clean_ip(resolvers, domain):
-    for t in ("doh", "dot", "udp"):
-        for r in resolvers:
-            res = r["results"].get(t, {}).get("domains", {}).get(domain, {})
-            if res.get("status") == "ok":
-                return res["ip"]
+def clean_ip(resolvers, domain, trusted):
+    return next(iter(trusted[domain]), None) or next(
+        (res["ip"] for res, d in ok_answers(resolvers, ("udp",)) if d == domain), None)
 
 
 def summarize(site, resolvers, tls):
@@ -287,8 +333,9 @@ def main():
                    for _, t, send in jobs]
         for (r, t, _), f in zip(jobs, futures):
             r.setdefault("results", {})[t] = f.result()
-        flag_blockpages(resolvers, pool)
-        tls = dict(zip(domains, pool.map(lambda d: test_tls(d, clean_ip(resolvers, d)), domains)))
+        trusted = trusted_ips(resolvers, domains, pool)
+        flag_blockpages(resolvers, pool, trusted)
+        tls = dict(zip(domains, pool.map(lambda d: test_tls(d, clean_ip(resolvers, d, trusted)), domains)))
         hijacked = hijacked_resolvers(resolvers)
         hijack = probe.result() or bool(hijacked)
 

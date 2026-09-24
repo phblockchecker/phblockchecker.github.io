@@ -6,8 +6,11 @@
   "control": "wikipedia.org",
   "decoy_sni": "example.com",
   "hijack_probe_ip": "192.0.2.1",
-  "blockpage_ips": ["8.232.13.4"],
-  "blockpage_hosts": ["forbiddenaccess.globe.com.ph"],
+  "tor_proxy": "socks5h://127.0.0.1:9050",
+  "tor_doh": "https://cloudflare-dns.com/dns-query",
+  "blockpages": {
+    "Globe": { "ips": ["8.232.13.4"], "hosts": ["forbiddenaccess.globe.com.ph"] }
+  },
   "sites": [
     { "name": "Discord", "domains": ["discord.com", "discord.gg", "gateway.discord.gg", "cdn.discordapp.com"] },
     { "name": "Reddit", "domains": ["reddit.com", "www.reddit.com", "i.redd.it"] }

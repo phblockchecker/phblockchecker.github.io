@@ -62,5 +62,5 @@ python3 pi/checker.py && python3 -m http.server   # open http://localhost:8000
 
 ## Tuning
 
-- Found the ISP's block-page IP? Add it to `blockpage_ips` in `config.json`. The probe also flags block pages automatically when the ISP's answer serves the wrong TLS certificate.
+- Block pages are flagged automatically as "likely block page" (with the page title when it loads). Once confirmed, add the IP or CNAME host under `blockpages.<network>` in `config.json` to mark it certain. Networks with no entry rely on auto-detection only.
 - Add sites or resolvers in `config.json`. The site picks them up automatically.
