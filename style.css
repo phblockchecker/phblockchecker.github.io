@@ -52,9 +52,11 @@ code { font: 0.9em ui-monospace, SFMono-Regular, Menlo, monospace; background: v
 
 .lede { font-size: 1.1rem; }
 .meta, .muted { color: var(--muted); font-size: 0.9rem; }
-.warn, .callout { padding: 10px 14px; border-radius: var(--radius); }
+.warn, .callout, .update { padding: 10px 14px; border-radius: var(--radius); }
 .warn { background: var(--dns-bg); color: var(--dns); }
 .callout { background: var(--hard-bg); margin-top: 16px; }
+.update { background: var(--ok-bg); color: var(--ok); }
+.update a { color: inherit; }
 
 /* Site cards */
 .sites { display: grid; gap: 16px; margin-top: 28px; }

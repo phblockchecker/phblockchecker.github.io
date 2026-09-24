@@ -45,7 +45,7 @@ function renderSite(site, s, net, history) {
   const strip = el("div", { class: "history", role: "img", "aria-label": `${site.name} history` });
   for (const h of history) {
     const lvl = h.levels[site.name] || "unknown";
-    strip.append(el("span", { class: lvl, title: `${new Date(h.t).toLocaleString()} · ${LEVELS[lvl][0]}` }));
+    strip.append(withTip(el("span", { class: lvl }), () => [`${new Date(h.t).toLocaleString()} · ${LEVELS[lvl][0]}`]));
   }
 
   return el("article", { class: "card" },
@@ -57,7 +57,7 @@ function renderSite(site, s, net, history) {
       check("Encrypted DNS", s.encrypted_dns),
       check(connLabel, !tlsBad.length)),
     strip,
-    el("div", { class: "history-legend" }, el("span", {}, history.length ? ago(history[0].t) : ""), el("span", {}, "now")));
+    el("div", { class: "history-legend" }, el("span", {}, history.length ? ago(history[0].t) : ""), el("span", {}, history.length ? ago(history.at(-1).t) : "")));
 }
 
 const clean = (res) => res?.status === "up" && Object.values(res.domains).every((d) => d.status === "ok");
@@ -103,24 +103,27 @@ function domainDetail(d) {
     ...(d.title ? [el("div", { class: "tip-detail tip-title" }, `“${d.title}”`)] : [])];
 }
 
-// Hover/tap a pill to see ✓/✗/? per domain, grouped by site
-function withDomains(pill, res, sites) {
+// Show the shared tooltip on hover/tap; content() returns its children
+function withTip(node, content) {
   const show = () => {
-    tip.replaceChildren(...sites.map((s) => el("section", {},
-      el("div", { class: "tip-site" }, s.name),
-      el("ul", { class: "checks" }, ...s.domains.filter((n) => res.domains[n]).map((n) =>
-        check(el("span", {}, n), { ok: true, blocked: false }[res.domains[n].status], ...domainDetail(res.domains[n])))))));
+    tip.replaceChildren(...content());
     tip.hidden = false;
-    const r = pill.getBoundingClientRect();
+    const r = node.getBoundingClientRect();
     const below = r.bottom + 6 + tip.offsetHeight < innerHeight;
     tip.style.left = `${Math.max(16, Math.min(r.left, innerWidth - tip.offsetWidth - 16))}px`;
     tip.style.top = `${below ? r.bottom + 6 : r.top - tip.offsetHeight - 6}px`;
   };
-  pill.tabIndex = 0;
-  for (const e of ["mouseenter", "focus"]) pill.addEventListener(e, show);
-  for (const e of ["mouseleave", "blur"]) pill.addEventListener(e, hideTip);
-  return pill;
+  node.tabIndex = 0;
+  for (const e of ["mouseenter", "focus"]) node.addEventListener(e, show);
+  for (const e of ["mouseleave", "blur"]) node.addEventListener(e, hideTip);
+  return node;
 }
+
+// Hover/tap a pill to see ✓/✗/? per domain, grouped by site
+const withDomains = (pill, res, sites) => withTip(pill, () => sites.map((s) => el("section", {},
+  el("div", { class: "tip-site" }, s.name),
+  el("ul", { class: "checks" }, ...s.domains.filter((n) => res.domains[n]).map((n) =>
+    check(el("span", {}, n), { ok: true, blocked: false }[res.domains[n].status], ...domainDetail(res.domains[n])))))));
 
 function resolverCell(res, sites) {
   if (!res) return el("td", {}, el("span", { class: "pill na" }, "—"));
