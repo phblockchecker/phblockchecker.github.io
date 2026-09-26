@@ -1,0 +1,3348 @@
+{
+ "updated": "2026-09-26T20:00:45+00:00",
+ "network": "Globe",
+ "sites": [
+  {
+   "name": "Discord",
+   "domains": [
+    "discord.com",
+    "discord.gg",
+    "gateway.discord.gg",
+    "cdn.discordapp.com"
+   ]
+  },
+  {
+   "name": "Reddit",
+   "domains": [
+    "reddit.com",
+    "www.reddit.com",
+    "i.redd.it"
+   ]
+  }
+ ],
+ "dns_intercepted": false,
+ "hijacked": [],
+ "summary": {
+  "Discord": {
+   "level": "open",
+   "isp_dns": true,
+   "alt_dns": true,
+   "encrypted_dns": true,
+   "tls": {
+    "discord.com": "ok",
+    "discord.gg": "ok",
+    "gateway.discord.gg": "ok",
+    "cdn.discordapp.com": "ok"
+   }
+  },
+  "Reddit": {
+   "level": "open",
+   "isp_dns": true,
+   "alt_dns": true,
+   "encrypted_dns": true,
+   "tls": {
+    "reddit.com": "ok",
+    "www.reddit.com": "ok",
+    "i.redd.it": "ok"
+   }
+  }
+ },
+ "tls": {
+  "discord.com": {
+   "status": "ok",
+   "ip": "162.159.128.233"
+  },
+  "discord.gg": {
+   "status": "ok",
+   "ip": "162.159.135.234"
+  },
+  "gateway.discord.gg": {
+   "status": "ok",
+   "ip": "162.159.135.234"
+  },
+  "cdn.discordapp.com": {
+   "status": "ok",
+   "ip": "162.159.130.233"
+  },
+  "reddit.com": {
+   "status": "ok",
+   "ip": "151.101.1.140"
+  },
+  "www.reddit.com": {
+   "status": "ok",
+   "ip": "151.101.65.140"
+  },
+  "i.redd.it": {
+   "status": "ok",
+   "ip": "151.101.65.140"
+  }
+ },
+ "resolvers": [
+  {
+   "name": "Globe default",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    }
+   },
+   "isp": true
+  },
+  {
+   "name": "Cloudflare",
+   "ip": "1.1.1.1",
+   "tls_host": "one.one.one.one",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "down",
+     "detail": "timeout"
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Cloudflare (secondary)",
+   "ip": "1.0.0.1",
+   "tls_host": "one.one.one.one",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "down",
+     "detail": "timeout"
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Google",
+   "ip": "8.8.8.8",
+   "tls_host": "dns.google",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "down",
+     "detail": "timeout"
+    },
+    "doh": {
+     "status": "down",
+     "detail": "timeout"
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Google (secondary)",
+   "ip": "8.8.4.4",
+   "tls_host": "dns.google",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "down",
+     "detail": "timeout"
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Quad9",
+   "ip": "9.9.9.9",
+   "tls_host": "dns.quad9.net",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Quad9 (secondary)",
+   "ip": "149.112.112.112",
+   "tls_host": "dns.quad9.net",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Quad9 (unfiltered)",
+   "ip": "9.9.9.10",
+   "tls_host": "dns10.quad9.net",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "OpenDNS",
+   "ip": "208.67.222.222",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "OpenDNS (secondary)",
+   "ip": "208.67.220.220",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "AdGuard",
+   "ip": "94.140.14.14",
+   "tls_host": "dns.adguard-dns.com",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "AdGuard (unfiltered)",
+   "ip": "94.140.14.140",
+   "tls_host": "unfiltered.adguard-dns.com",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Mullvad",
+   "ip": "194.242.2.2",
+   "tls_host": "dns.mullvad.net",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Mullvad (adblock)",
+   "ip": "194.242.2.3",
+   "tls_host": "adblock.dns.mullvad.net",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Control D",
+   "ip": "76.76.2.0",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Control D (secondary)",
+   "ip": "76.76.10.0",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.161.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.149.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "NextDNS",
+   "ip": "45.90.28.0",
+   "tls_host": "dns.nextdns.io",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.205.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.205.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.205.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.205.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "CleanBrowsing (security)",
+   "ip": "185.228.168.9",
+   "tls_host": "security-filter-dns.cleanbrowsing.org",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "down",
+     "detail": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:992)"
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "DNS.SB",
+   "ip": "185.222.222.222",
+   "tls_host": "dot.sb",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "DNS.SB (secondary)",
+   "ip": "45.11.45.11",
+   "tls_host": "dot.sb",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.45.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Hurricane Electric",
+   "ip": "74.82.42.42",
+   "tls_host": "ordns.he.net",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "DNS4EU (unfiltered)",
+   "ip": "86.54.11.100",
+   "tls_host": "unfiltered.joindns4.eu",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.141.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.241.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.241.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.241.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.241.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.241.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Quad101 (Taiwan)",
+   "ip": "101.101.101.101",
+   "tls_host": "dns.twnic.tw",
+   "results": {
+    "udp": {
+     "status": "down",
+     "detail": "timeout"
+    },
+    "dot": {
+     "status": "down",
+     "detail": "timeout"
+    },
+    "doh": {
+     "status": "down",
+     "detail": "timeout"
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "IIJ (Japan)",
+   "tls_host": "public.dns.iij.jp",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.161.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.161.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.161.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.161.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Alibaba",
+   "ip": "223.5.5.5",
+   "tls_host": "dns.alidns.com",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Alibaba (secondary)",
+   "ip": "223.6.6.6",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.21.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "DNSPod (Tencent)",
+   "ip": "119.29.29.29",
+   "tls_host": "dot.pub",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "down",
+     "detail": "timeout"
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "114DNS",
+   "ip": "114.114.114.114",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.197.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.197.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Baidu",
+   "ip": "180.76.76.76",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "108.160.169.185"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "31.13.95.34"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "128.242.240.85"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "103.226.246.99"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "174.132.167.252"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "174.132.167.252"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Yandex",
+   "ip": "77.88.8.8",
+   "tls_host": "common.dot.dns.yandex.net",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.173.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.5.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.5.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.5.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.5.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.173.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "UltraDNS",
+   "ip": "64.6.64.6",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "UltraDNS (alt)",
+   "ip": "156.154.70.1",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Comodo Secure",
+   "ip": "8.26.56.26",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "error",
+       "detail": "timeout"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.129.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "SafeDNS",
+   "ip": "195.46.39.39",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Dyn",
+   "ip": "216.146.35.35",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.41.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.113.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Gcore",
+   "ip": "95.85.95.85",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.77.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "CIRA Canadian Shield",
+   "ip": "149.112.121.10",
+   "tls_host": "private.canadianshield.cira.ca",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.21.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.21.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.21.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.137.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "SWITCH (Switzerland)",
+   "ip": "130.59.31.248",
+   "tls_host": "dns.switch.ch",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Digitale Gesellschaft",
+   "ip": "185.95.218.42",
+   "tls_host": "dns.digitale-gesellschaft.ch",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.117.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.141.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Applied Privacy",
+   "ip": "146.255.56.98",
+   "tls_host": "dot1.applied-privacy.net",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.117.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.133.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.17.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "CZ.NIC ODVR",
+   "ip": "193.17.47.1",
+   "tls_host": "odvr.nic.cz",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.117.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.138.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.117.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "LibreDNS",
+   "ip": "116.202.176.26",
+   "tls_host": "dot.libredns.gr",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.1.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "UncensoredDNS",
+   "ip": "91.239.100.100",
+   "tls_host": "anycast.uncensoreddns.org",
+   "results": {
+    "udp": {
+     "status": "down",
+     "detail": "timeout"
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.37.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.37.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.136.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.135.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.37.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.37.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "DNS Forge",
+   "ip": "176.9.93.198",
+   "tls_host": "dnsforge.de",
+   "results": {
+    "udp": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    },
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.129.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.193.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "146.75.121.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "Wikimedia DNS",
+   "ip": "185.71.138.138",
+   "tls_host": "wikimedia-dns.org",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.137.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.134.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.137.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.137.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.135.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.130.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "140.248.137.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "140.248.137.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  },
+  {
+   "name": "RethinkDNS",
+   "tls_host": "max.rethinkdns.com",
+   "results": {
+    "dot": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.128.233"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.135.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.130.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "199.232.113.140"
+      }
+     }
+    },
+    "doh": {
+     "status": "up",
+     "domains": {
+      "discord.com": {
+       "status": "ok",
+       "ip": "162.159.136.232"
+      },
+      "discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "gateway.discord.gg": {
+       "status": "ok",
+       "ip": "162.159.133.234"
+      },
+      "cdn.discordapp.com": {
+       "status": "ok",
+       "ip": "162.159.134.233"
+      },
+      "reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "www.reddit.com": {
+       "status": "ok",
+       "ip": "151.101.65.140"
+      },
+      "i.redd.it": {
+       "status": "ok",
+       "ip": "151.101.129.140"
+      }
+     }
+    }
+   },
+   "isp": false
+  }
+ ]
+}
